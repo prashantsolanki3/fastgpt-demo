@@ -1,3 +1,4 @@
+import os
 import openai
 import uvicorn
 from fastapi import FastAPI
@@ -6,7 +7,7 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-openai.api_key = "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"
+openai.api_key = os.environ.get('OPENAI_KEY')
 
 class ChatRequest(BaseModel):
     message: str
