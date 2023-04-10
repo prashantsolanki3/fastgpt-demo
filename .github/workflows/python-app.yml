@@ -39,7 +39,7 @@ jobs:
     - name: Set environment variable and run tests
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_KEY }}
-      run: echo "Environment Configured. Running Tests." && pytest
+      run: echo "Environment Configured- $OPENAI_API_KEY Running Tests." && pytest
     #- name: Test with pytest
     #  run: |
     #    pytest
