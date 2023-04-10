@@ -8,7 +8,7 @@ from pydantic import BaseModel
 app = FastAPI()
 
 openai.api_key = os.environ.get('OPENAI_API_KEY')
-
+print(openai.api_key)
 class ChatRequest(BaseModel):
     message: str
     conversation_id: str = None
