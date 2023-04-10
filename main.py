@@ -20,16 +20,14 @@ async def read_main():
 
 @app.post("/chat")
 async def chat(request: ChatRequest):
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": "Who won the world series in 2020?"},
-                {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
-                {"role": "user", "content": "Where was it played?"}
-            ]
-        )
-    return {"message": response}
+    response = openai.Completion.create(
+            engine="davinci",
+            prompt=f"Conversation with {request.conversation_id}\n\nHuman: {request.message}\nAI:",
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.5,)
+    return {"message": response.choices[0].text.strip()}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
